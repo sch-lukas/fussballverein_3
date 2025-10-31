@@ -19,23 +19,22 @@ import { HttpException, HttpStatus } from '@nestjs/common';
 
 /**
  * Das Modul besteht aus den Klassen für die Fehlerbehandlung bei der Verwaltung
- * von Büchern, z.B. beim DB-Zugriff.
+ * von Fussballvereinen, z.B. beim DB-Zugriff.
  * @packageDocumentation
  */
 
 /**
- * Exception-Klasse für eine bereits existierende ISBN-Nummer.
+ * Exception-Klasse für einen bereits existierenden Vereinsnamen.
  */
-export class IsbnExistsException extends HttpException {
-    readonly isbn: string | undefined;
+export class NameExistsException extends HttpException {
+    readonly vereinsname: string | undefined;
 
-    constructor(isbn: string | undefined) {
+    constructor(vereinsname: string | undefined) {
         super(
-            `Die ISBN-Nummer ${isbn} existiert bereits.`,
-            // TODO https://github.com/nestjs/nest/issues/15624 https://github.com/nodejs/node/blob/main/lib/_http_server.js#L159
+            `Der Vereinsname "${vereinsname}" existiert bereits.`,
             HttpStatus.UNPROCESSABLE_ENTITY,
         );
-        this.isbn = isbn;
+        this.vereinsname = vereinsname;
     }
 }
 
@@ -47,7 +46,7 @@ export class VersionInvalidException extends HttpException {
 
     constructor(version: string | undefined) {
         super(
-            `Die Versionsnummer ${version} ist ungueltig.`,
+            `Die Versionsnummer ${version} ist ungültig.`,
             HttpStatus.PRECONDITION_FAILED,
         );
         this.version = version;

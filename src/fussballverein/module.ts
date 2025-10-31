@@ -1,4 +1,5 @@
-// Copyright (C) 2021 - present Juergen Zimmermann, Hochschule Karlsruhe
+// Copyright (C) 2025 - present [Dein Name]
+// Hochschule Karlsruhe / Projekt Fussballverein
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,18 +17,21 @@
 import { Module } from '@nestjs/common';
 import { MailModule } from '../mail/module.js';
 import { KeycloakModule } from '../security/keycloak/module.js';
-import { BuchController } from './controller/buch-controller.js';
-import { BuchWriteController } from './controller/buch-write-controller.js';
-import { BuchMutationResolver } from './resolver/mutation.js';
-import { BuchQueryResolver } from './resolver/query.js';
-import { BuchService } from './service/buch-service.js';
-import { BuchWriteService } from './service/buch-write-service.js';
+
+import { FussballvereinGetController } from './controller/fussballverein-controller.js';
+import { FussballvereinWriteController } from './controller/fussballverein-write-controller.js';
+
+import { FussballvereinMutationResolver } from './resolver/mutation.js';
+import { FussballvereinQueryResolver } from './resolver/query.js';
+
+import { FussballvereinService } from './service/fussballverein-service.js';
+import { FussballvereinWriteService } from './service/fussballverein-write-service.js';
 import { PrismaService } from './service/prisma-service.js';
 import { WhereBuilder } from './service/where-builder.js';
 
 /**
  * Das Modul besteht aus Controller- und Service-Klassen für die Verwaltung von
- * Bücher.
+ * Fussballvereinen.
  * @packageDocumentation
  */
 
@@ -37,17 +41,15 @@ import { WhereBuilder } from './service/where-builder.js';
  */
 @Module({
     imports: [KeycloakModule, MailModule],
-    controllers: [BuchController, BuchWriteController],
-    // Provider sind z.B. Service-Klassen fuer DI
+    controllers: [FussballvereinGetController, FussballvereinWriteController],
     providers: [
-        BuchService,
-        BuchWriteService,
-        BuchQueryResolver,
-        BuchMutationResolver,
+        FussballvereinService,
+        FussballvereinWriteService,
+        FussballvereinQueryResolver,
+        FussballvereinMutationResolver,
         PrismaService,
         WhereBuilder,
     ],
-    // Export der Provider fuer DI in anderen Modulen
-    exports: [BuchService, BuchWriteService],
+    exports: [FussballvereinService, FussballvereinWriteService],
 })
-export class BuchModule {}
+export class FussballvereinModule {}
